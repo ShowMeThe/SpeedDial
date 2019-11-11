@@ -7,5 +7,5 @@
 ```
 #### 尚未完成如下：  (待开发)
 1、尚未优化使用方法  
-2、未添加右上角向下显示的功能
-3、为添加非FloatActionButton的Beahavior
+2、未添加右上角向下显示的功能  
+3、未添加非FloatActionButton的Beahavior
