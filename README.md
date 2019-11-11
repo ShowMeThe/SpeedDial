@@ -4,7 +4,6 @@
 #### 发布版本
 ```
  implementation 'com.github.ShowMeThe:SpeedDial:0.01'
- 
 ```
 #### 尚未完成如下：  (待开发)
 1、尚未优化使用方法  
