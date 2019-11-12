@@ -1,10 +1,9 @@
 ### 大致效果如下gif  
-<img src="https://github.com/ShowMeThe/SpeedDial/blob/master/gif/20191111.gif" width = "200" alt = "演示效果" /><img src="https://github.com/ShowMeThe/SpeedDial/blob/master/gif/20191112.gif" width = "200" alt = "演示效果2" />  
+<img src="https://github.com/ShowMeThe/SpeedDial/blob/master/gif/20191111.gif" height ="420" width = "200" alt = "演示效果" /><img src="https://github.com/ShowMeThe/SpeedDial/blob/master/gif/20191112.gif"  height ="420" width = "200" alt = "演示效果2" />  
 
 #### 发布版本
-```
+```Java
  implementation 'com.github.ShowMeThe:SpeedDial:0.02'
- 
 ```
 #### 尚未完成如下：  (待开发)
 1、尚未优化使用方法  
