@@ -2,6 +2,7 @@ package com.showmethe.speeddiallib.expand
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.circularreveal.CircularRevealLinearLayout
@@ -18,7 +19,11 @@ open class ExpandParentBehavior(context: Context?, attrs: AttributeSet?)
 
     private var lock = false //防止重复设置点击事件
     override fun layoutDependsOn(parent: CoordinatorLayout, child: ExpandMenuChildLayout, dependency: View): Boolean {
-        return dependency is FloatingActionButton
+        if(dependency is FloatingActionButton){
+            return (child.layoutParams as CoordinatorLayout.LayoutParams).anchorId == dependency.id
+        }else{
+            return false
+        }
     }
 
 

@@ -64,6 +64,9 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
             Builder.Slide.TOP ->{
                 addTopMenu()
             }
+            Builder.Slide.BOTTOM ->{
+                addBottomMenu()
+            }
         }
     }
 
@@ -310,6 +313,21 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
 
     }
 
+
+    private fun addBottomMenu(){
+        orientation = LinearLayout.VERTICAL
+        //fabs.reverse()
+        for((index,fab) in fabs.withIndex()){
+            val container = LinearLayout(context)
+            container.orientation = LinearLayout.HORIZONTAL
+            parentLayoutParams.gravity =  Gravity.END
+            container.gravity = Gravity.CENTER
+            container.addView(textLabel[index])
+            container.addView(fab)
+            addView(container,parentLayoutParams)
+        }
+
+    }
 
     private var onMenuClick:((index:Int)->Unit)? = null
     fun setOnMenuClickListener(onMenuClick:((index:Int)->Unit)){
