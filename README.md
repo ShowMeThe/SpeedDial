@@ -3,9 +3,15 @@
 
 #### 发布版本
 ```
- implementation 'com.github.ShowMeThe:SpeedDial:0.01'
+ implementation 'com.github.ShowMeThe:SpeedDial:0.02'
+ 
 ```
 #### 尚未完成如下：  (待开发)
 1、尚未优化使用方法  
-2、未添加右上角向下显示的功能  
-3、未添加非FloatActionButton的Beahavior
+2、未添加非FloatActionButton的Beahavior  
+<del>3、未添加右上角向下显示的功能 </del>  
+<del>4、多个FloatActionButton适配 </del>  
+<del>5、存在多次点击重复设置点击事件问题 </del>  
+
+
+
