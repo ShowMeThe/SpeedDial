@@ -1,5 +1,5 @@
 ### 大致效果如下gif  
-<img src="https://github.com/ShowMeThe/SpeedDial/blob/master/gif/20191111.gif" width = "200" alt = "演示效果" />    
+<img src="https://github.com/ShowMeThe/SpeedDial/blob/master/gif/20191111.gif" width = "200" alt = "演示效果" />
 <img src="https://github.com/ShowMeThe/SpeedDial/blob/master/gif/20191112.gif" width = "200" alt = "演示效果2" />  
 
 #### 发布版本
