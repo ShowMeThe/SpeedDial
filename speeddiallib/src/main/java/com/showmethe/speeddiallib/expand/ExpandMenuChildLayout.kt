@@ -7,10 +7,12 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.LinearLayout
+import androidx.core.animation.doOnEnd
 import androidx.core.content.ContextCompat
 
 import com.google.android.material.circularreveal.CircularRevealLinearLayout
@@ -97,7 +99,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
         textView.text = expandIcon.getTextLabel()
         textView.setTextColor(Color.parseColor("#333333"))
         textView.setPadding(10,10,10,10)
-        textView.elevation = 11f
+        textView.elevation = 8f
         val layoutParams = MarginLayoutParams(MarginLayoutParams.WRAP_CONTENT, MarginLayoutParams.WRAP_CONTENT)
         layoutParams.marginEnd = 15
         textView.layoutParams = layoutParams
@@ -110,14 +112,15 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
     }
 
 
-    fun toVisible(){
+    fun toVisible(it :View){
         if(fabs.isEmpty() || !isHide || showCount != 0){
             return
         }
+        it.isEnabled = false
         visibility = View.VISIBLE
         if(showSet.isEmpty()){
            for((index,fab)  in fabs.withIndex()){
-               createShow(index, fab)
+               createShow(index, fab,it)
            }
             for(animator in showSet){
                 animator.start()
@@ -129,14 +132,14 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
     }
 
 
-    fun toInVisible(){
+    fun toInVisible(it :View){
         if(fabs.isEmpty() || isHide || showCount == 0){
             return
         }
-
+        it.isEnabled = false
         if(hideSet.isEmpty()){
             for((index,fab)  in fabs.withIndex()){
-                createHide(index, fab)
+                createHide(index, fab,it)
             }
             for(animator in hideSet){
                 animator.start()
@@ -188,9 +191,13 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
            val newBackgroundTint = ContextCompat.getColorStateList(context,builder.getMotionColor())
            val newDrawable = context.getDrawable(builder.getMotionIcon())
            showMotionSet.addListener(object : AnimatorListenerAdapter(){
+               override fun onAnimationStart(animation: Animator?) {
+
+               }
                override fun onAnimationEnd(animation: Animator?) {
                    fab.backgroundTintList = newBackgroundTint
                    fab.setImageDrawable(newDrawable)
+
                }
            })
            showMotionSet.start()
@@ -216,6 +223,10 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
             hideMotionSet.duration = 450
             hideMotionSet.playTogether(alpha,rotate,scaleX,scaleY,color)
             hideMotionSet.addListener(object : AnimatorListenerAdapter(){
+                override fun onAnimationStart(animation: Animator?) {
+
+                }
+
                 override fun onAnimationEnd(animation: Animator?) {
                     reverseSave(fab)
                 }
@@ -226,7 +237,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
         }
     }
 
-    private fun createShow(index: Int,fab : FloatingActionButton){
+    private fun createShow(index: Int,fab : FloatingActionButton,it:View){
         val alpha = ObjectAnimator.ofFloat(fab,"alpha",0f,1.0f)
         val scaleX = ObjectAnimator.ofFloat(fab,"scaleX",0f,1.0f)
         val scaleY = ObjectAnimator.ofFloat(fab,"scaleY",0f,1.0f)
@@ -247,6 +258,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
                 showCount ++
                 if(showCount == targetCount){
                     isHide = false
+                    it.isEnabled = true
                 }
             }
         }
@@ -255,7 +267,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
     }
 
 
-    private fun createHide(index: Int,fab : FloatingActionButton){
+    private fun createHide(index: Int,fab : FloatingActionButton,it:View){
         val alpha = ObjectAnimator.ofFloat(fab,"alpha",1f,0.0f)
         val scaleX = ObjectAnimator.ofFloat(fab,"scaleX",1f,0.0f)
         val scaleY = ObjectAnimator.ofFloat(fab,"scaleY",1f,0.0f)
@@ -274,6 +286,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
                 showCount--
                 if(showCount == 0){
                     isHide = true
+                    it.isEnabled = true
                 }
             }
         }
@@ -288,6 +301,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
         for((index,fab) in fabs.withIndex()){
             val container = LinearLayout(context)
             container.orientation = LinearLayout.HORIZONTAL
+            parentLayoutParams.gravity =  Gravity.END
             container.gravity = Gravity.CENTER
             container.addView(textLabel[index])
             container.addView(fab)
