@@ -54,17 +54,17 @@ open class ExpandParentBehavior(context: Context?, attrs: AttributeSet?)
 
     }
 
-
-}
-//过滤疯狂点击
-private fun View.setOnSingleClickListener(onSingleClick : (it:View)->Unit){
-    var lastClickTime = 0L
-    val lastLongTime = 500L
-    setOnClickListener {
-        val time = System.currentTimeMillis()
-        if(time - lastClickTime > lastLongTime){
-            onSingleClick.invoke(it)
-            lastClickTime = time
+    //过滤疯狂点击
+    private fun View.setOnSingleClickListener(onSingleClick : (it:View)->Unit){
+        var lastClickTime = 0L
+        val lastLongTime = 500L
+        setOnClickListener {
+            val time = System.currentTimeMillis()
+            if(time - lastClickTime > lastLongTime){
+                onSingleClick.invoke(it)
+                lastClickTime = time
+            }
         }
     }
+
 }
