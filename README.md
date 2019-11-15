@@ -45,7 +45,7 @@ xml需要配置相应如下 </br>
 
 #### 发布版本
 ```kotlin
- implementation 'com.github.ShowMeThe:SpeedDial:0.02'
+ implementation 'com.github.ShowMeThe:SpeedDial:0.03'
 ```
 #### 尚未完成如下：  (待开发)
 1、尚未优化使用方法  
