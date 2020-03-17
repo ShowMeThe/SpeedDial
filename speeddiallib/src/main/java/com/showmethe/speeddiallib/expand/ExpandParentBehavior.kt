@@ -34,11 +34,11 @@ open class ExpandParentBehavior(context: Context?, attrs: AttributeSet?)
                     if(child.isHidden()){
                         child.toVisible(dependency)
                         child.createMotion(dependency)
-                        dependency.isExpanded = true
+                        //dependency.isExpanded = true
                     }else{
                         child.toInVisible(dependency)
                         child.createMotion(dependency)
-                        dependency.isExpanded = false
+                        //dependency.isExpanded = false
                     }
                 }
                 lock = true

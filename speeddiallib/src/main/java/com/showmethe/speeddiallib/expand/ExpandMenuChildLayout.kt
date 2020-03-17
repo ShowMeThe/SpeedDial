@@ -30,7 +30,7 @@ import kotlin.collections.ArrayList
 class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRevealLinearLayout(context, attrs) {
 
 
-    private lateinit var builder: Builder
+    private lateinit var builder: ExpandManager.Builder
     private val fabs = ArrayList<FloatingActionButton>()
     private val textLabel = ArrayList<MaterialTextView>()
     private val parentLayoutParams = LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
@@ -47,7 +47,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
 
     fun isHidden() = isHide
 
-    fun setBuilder(builder: Builder){
+    fun setBuilder(builder: ExpandManager.Builder){
         this.builder = builder
         targetCount = builder.getExpandIcons().size
         init()
@@ -61,10 +61,10 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
         }
 
         when(builder.getSlide()){
-            Builder.Slide.TOP ->{
+            ExpandManager.Builder.Slide.TOP ->{
                 addTopMenu()
             }
-            Builder.Slide.BOTTOM ->{
+            ExpandManager.Builder.Slide.BOTTOM ->{
                 addBottomMenu()
             }
         }
@@ -154,6 +154,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
     }
 
     fun createMotion(fab: FloatingActionButton){
+        fab.elevation = 8f
        if(builder.getMotionIcon()!=-1){
            if(isHidden()){
                createSave(fab)
