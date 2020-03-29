@@ -31,7 +31,7 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
 
 
     private lateinit var builder: ExpandManager.Builder
-    private val fabs = ArrayList<FloatingActionButton>()
+    val fabs = ArrayList<FloatingActionButton>()
     private val textLabel = ArrayList<MaterialTextView>()
     private val parentLayoutParams = LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT)
     private val showSet  = ArrayList<AnimatorSet>()
@@ -52,6 +52,8 @@ class ExpandMenuChildLayout(context: Context, attrs: AttributeSet?) : CircularRe
         targetCount = builder.getExpandIcons().size
         init()
     }
+
+    fun getBuilder() = builder
 
     private fun init(){
 
